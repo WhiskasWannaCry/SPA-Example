@@ -1,0 +1,33 @@
+.login_btn,.register_btn {
+  cursor: pointer;
+  width: 180px;
+  height: 100%;
+  background:transparent;
+  border: none;
+  font-size: 20px;
+  color: whitesmoke;
+  transition: all 0.3s;
+}
+
+.login_btn {
+  border-left: 2px solid whitesmoke;
+  border-right: 1px solid whitesmoke;
+}
+
+.register_btn {
+  border-right: 2px solid whitesmoke;
+  border-left: 1px solid whitesmoke;
+}
+
+.login_btn:hover,.register_btn:hover {
+  color: black;
+}
+
+.login_btn:hover {
+  background-color: rgba(132, 165, 255, 0.39);
+}
+
+.register_btn:hover {
+  background-color: rgba(179, 132, 255, 0.39);
+}
+
