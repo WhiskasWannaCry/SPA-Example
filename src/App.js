@@ -3,7 +3,10 @@ import Body from './Body/Body';
 import Header from './Header/Header';
 import React, {useState} from 'react';
 
-import backgroundZerman from '../src/images/background.jpg'
+import backgroundZerman from '../src/images/background.jpg';
+import avatarWhiskas from '../src/images/1/avatar.jpg';
+import avatarZerman from '../src/images/2/avatar.jpg';
+
 
 function App() {
   const[users, setUsers] = useState([
@@ -18,16 +21,25 @@ function App() {
     },
     {
       id:0,
-      name: "Karim",
-      surname: "Zerman",
+      name: "Whiskas",
+      surname: "WannaCry",
       email: "whiskaswannacry@gmail.com",
       password: "0000",
-      image: "https://www.film.ru/sites/default/files/filefield_paths/the-weeknd_d186b_opgh.jpg",
+      image: avatarWhiskas,
+      background: backgroundZerman,
+    },
+    {
+      id:1,
+      name: "Karim",
+      surname: "Zerman",
+      email: "zermankarim@gmail.com",
+      password: "1111",
+      image: avatarZerman,
       background: backgroundZerman,
     },
   ])
 
-  const [loginedUser, setLoginedUser] = useState(users[0])
+  const [loginedUser, setLoginedUser] = useState(users[1])
   return (
     <div className='outer_container'>
       <Header

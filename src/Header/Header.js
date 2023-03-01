@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useId, useState } from "react";
 import './Header.css';
 import Login from "./LoginAndRegister/Login";
 import Register from "./LoginAndRegister/Register";
@@ -8,29 +8,37 @@ const Header = ({users,setUsers,loginedUser,setLoginedUser}) => {
   const [inputEmail, setInputEmail] = useState("")
   const [inputPass, setInputPass] = useState("")
 
-  const userLogInValidation = () => {
-    if(!re.test(String(inputEmail).toLowerCase())) {
-      alert("Entered e-mail is incorrect!")
-    }
-    if(!inputPass) {
-      alert("Entered pass is incorrect!")
-    }
-  }
-
   const hideLogInModal = () => {
     document.getElementById('login_modal_background').style.display = "none";
   }
 
+  const userLogInValidation = () => {
+    let userIdx = users.findIndex(user => user.email === inputEmail && user.password === inputPass)
+    if(!re.test(String(inputEmail).toLowerCase())) {
+      return alert("Entered e-mail is incorrect!")
+    }
+    if(!inputPass) {
+      return alert("Entered pass is incorrect!")
+    }
+    if(userIdx != -1) {
+      hideLogInModal()
+      return setLoginedUser(users[userIdx])
+    }
+    else {
+      alert("User is not defined")
+    }
+  }
+
   return (
     <div className="header_container">
-      <img className="logo_img" alt=""></img>
+      <div className="logo_img">Some Logo</div>
       <div className="log_and_reg_container">
         <Login
           users={users}
           setUsers={setUsers}
           loginedUser={loginedUser}
           setLoginedUser={setLoginedUser}></Login>
-          <Register></Register>
+          {loginedUser.id === -1? <Register></Register> : null}
           <div className="login_modal_background" id="login_modal_background">
             <div className="login_modal_container">
               <span className="modal_exit" onClick={hideLogInModal}>x</span>
@@ -43,6 +51,7 @@ const Header = ({users,setUsers,loginedUser,setLoginedUser}) => {
                   className="modal_input_email" 
                   placeholder="Enter Your email"></input>
                 <span className="modal_inputs_name">Password*:</span>
+                <span className="modal_warning">Incorrect E-mail</span>
                 <input 
                   onChange={e => setInputPass(e.target.value)}
                   value={inputPass}

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './UserInfo.css'
 
 const UserInfo = ({users,setUsers,loginedUser,setLoginedUser}) => {
   

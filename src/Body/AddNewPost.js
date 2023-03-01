@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const NewPost = ({posts,setPosts}) => {
+const NewPost = ({loginedUser,posts,setPosts}) => {
   const [title, setTitle] = useState('')
   const [text, setText] = useState('')
   const [postId, setPostId] = useState(3)
@@ -10,8 +10,8 @@ const NewPost = ({posts,setPosts}) => {
     if(title) {
       setPostId(postId+1);
       newPosts = posts.slice();
-      // newPosts.push({id:postId,title,text,})
-      // setPosts(newPosts)
+      newPosts.push({id:postId, date: new Date(), author: loginedUser,title,text,comments:[]})
+      setPosts(newPosts)
       
       console.log(newPosts)
     }

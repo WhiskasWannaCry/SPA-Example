@@ -93,6 +93,9 @@ box-shadow: 0px 14px 8px 0px rgba(0, 0, 0, 0.295);
   color:  rgb(135, 248, 141);
   border: 2px solid rgb(135, 248, 141);
   transition: all 0.5s;
+  font-family: 'DM Serif Display', serif;
+  font-family: 'Jost', sans-serif;
+  font-family: 'Space Mono', monospace;
 }
 
 .add_new_post_btn:hover {
@@ -110,10 +113,116 @@ box-shadow: 0px 14px 8px 0px rgba(0, 0, 0, 0.295);
 
 .post {
   width: 90%;
-  height: 300px;
+  min-height: 400px;
   background-color: rgb(93, 95, 230);
   border: 2px solid rgb(192, 196, 255);
   margin-top: 20px;
   border-radius: 10px;
   padding: 5px;
+  font-family: 'DM Serif Display', serif;
+  font-family: 'Jost', sans-serif;
+  font-family: 'Space Mono', monospace;
+}
+
+.post_user_image {
+  height: 50px;
+  border-radius: 50%;
+}
+
+.post_user_image_name_and_date {
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  
+}
+
+.post_info {
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+  background-color: rgb(77, 79, 185);
+}
+
+.post_user_name {
+  display: flex;
+  font-size: 20px;
+  font-weight: 700;
+  flex-grow: 1;
+  margin-left: 10px;
+}
+
+.post_title {
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+
+.post_image {
+  width: 100%;
+  min-height: 300px;
+}
+
+.post_comments_data {
+  margin-top: 20px;
+}
+
+.post_comment {
+  padding: 10px;
+  border: 1px solid whitesmoke;
+  margin-top: 10px;
+  background-color: rgb(108, 109, 184);
+}
+
+.comment_author_name_image_and_date {
+  display: flex;
+  align-items: center;
+}
+
+.comment_authon_name {
+  margin-left: 10px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.comment_authon_image_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.comment_authon_image {
+  width: 30px;
+  border-radius: 50%;
+}
+
+.comment_text {
+  margin-top: 20px;
+}
+
+.add_new_comment_container {
+  display: flex;
+  margin-top: 20px;
+}
+
+.comment_text_input {
+  border: 2px solid rgb(58, 59, 119);
+  width: 500px;
+  height: 60px;
+}
+
+.comment_add_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid whitesmoke;
+  background: transparent;
+  font-size: 20px;
+  flex-grow: 1;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.comment_add_btn:hover {
+  background-color: rgb(32, 32, 65);
+  color: whitesmoke;
 }
