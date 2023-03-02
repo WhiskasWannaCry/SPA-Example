@@ -4,7 +4,7 @@ const NewComment = ({loginedUser,post, posts, setPosts}) => {
   const [commentText, setCommentText] = useState("")
   const addNewCommentHandler = (e) => {
     let postsCopy = posts.slice()
-    const buttonId = Number(e.target.id)
+    const buttonId = e.target.id;
     const postId = postsCopy.findIndex(elem => elem.id === buttonId)
     if(postId!= -1 && commentText) {
       postsCopy[postId].comments.push({id: postsCopy[postId].comments.length||1, author: loginedUser, text: commentText,})

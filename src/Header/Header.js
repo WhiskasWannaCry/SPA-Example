@@ -31,7 +31,7 @@ const Header = ({users,setUsers,loginedUser,setLoginedUser}) => {
 
   return (
     <div className="header_container">
-      <div className="logo_img">Some Logo</div>
+      <div className="logo_img">{"< Some Logo / >"}</div>
       <div className="log_and_reg_container">
         <Login
           users={users}
