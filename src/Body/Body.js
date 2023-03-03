@@ -3,15 +3,15 @@ import React from "react";
 import UserBackground from './UserBackground';
 import BodyContent from './BodyContent';
 
-const Body = ({users,setUsers,loginedUser,setLoginedUser}) => {
+const Body = ({users,setUsers,authUser,setAuthUser}) => {
   return (
     <div className='body_container'>
-      {loginedUser.background && <UserBackground loginedUser={loginedUser}></UserBackground>}
+      {authUser.background && <UserBackground authUser={authUser}></UserBackground>}
       <BodyContent
         users={users}
         setUsers={setUsers}
-        loginedUser={loginedUser}
-        setLoginedUser={setLoginedUser}
+        authUser={authUser}
+        setAuthUser={setAuthUser}
       ></BodyContent>
     </div>
   )

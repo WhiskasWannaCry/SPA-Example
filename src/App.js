@@ -39,22 +39,22 @@ function App() {
     },
   ])
 
-  const [loginedUser, setLoginedUser] = useState(users[1])
+  const [authUser, setAuthUser] = useState(users[0])
   return (
     <div className='outer_container'>
       <Header
         users={users}
         setUsers={setUsers}
-        loginedUser={loginedUser}
-        setLoginedUser={setLoginedUser}
+        authUser={authUser}
+        setAuthUser={setAuthUser}
       ></Header>
       <div className='inner_container'>
         
         <Body
           users={users}
           setUsers={setUsers}
-          loginedUser={loginedUser}
-          setLoginedUser={setLoginedUser}
+          authUser={authUser}
+          setAuthUser={setAuthUser}
         ></Body>
       </div>
     </div>

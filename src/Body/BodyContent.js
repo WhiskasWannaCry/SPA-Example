@@ -7,7 +7,7 @@ import UserInfo from "./UserInfo";
 import thirdPostImage from '../images/post_image1.jpg'
 import secondPostImage from '../images/post_image2.jpg'
 
-const BodyContent = ({users,setUsers,loginedUser,setLoginedUser}) => {
+const BodyContent = ({users,setUsers,authUser,setAuthUser}) => {
   const [posts, setPosts] = useState([
     {
       id:'sv9cl7',
@@ -79,12 +79,13 @@ const BodyContent = ({users,setUsers,loginedUser,setLoginedUser}) => {
     },
   ])
 
-  const likePostHandler = (e) => {
-    const postsCopy = posts.slice()
-    const likeBtnId = e.target.id;
-    const postId = postsCopy.findIndex(elem => elem.id === likeBtnId)
-    postsCopy[postId].likes+=1;
-    setPosts(postsCopy)
+  const likePostHandler = (postId) => {
+    if(authUser.id!=-1) {
+      const postsCopy = posts.slice()
+      const postIdx = postsCopy.findIndex(elem => elem.id === postId)
+      postsCopy[postIdx].likes+=1;
+      setPosts(postsCopy)
+    }
   }
 
   return (
@@ -94,14 +95,14 @@ const BodyContent = ({users,setUsers,loginedUser,setLoginedUser}) => {
       <UserInfo
         users={users}
         setUsers={setUsers}
-        loginedUser={loginedUser}
-        setLoginedUser={setLoginedUser}
+        authUser={authUser}
+        setAuthUser={setAuthUser}
       ></UserInfo>
       <div className="header_like_code_closed">{"< /UserInfo >"}</div>
       </div>
       
       <div className="posts_container">
-        {loginedUser.id != -1 && <NewPost loginedUser={loginedUser} posts={posts} setPosts={setPosts}></NewPost>}
+        {authUser.id != -1 && <NewPost authUser={authUser} posts={posts} setPosts={setPosts}></NewPost>}
         <div className="posts">
           {posts.map(post => {
             return (
@@ -127,13 +128,18 @@ const BodyContent = ({users,setUsers,loginedUser,setLoginedUser}) => {
                     <span className="post_likes_count">{post.likes}</span>
                     <img
                     id={post.id}
-                    onClick={e => likePostHandler(e)}
+                    onClick={() => likePostHandler(post.id)}
                     className="post_likes_icon" 
                     src="https://cdn4.iconfinder.com/data/icons/minimal-set-eight/32/minimal-65-512.png" 
                     alt=""></img>
                   </div>
                   <Comments post={post}></Comments>
-                  {loginedUser.id!=-1 && <NewComment loginedUser={loginedUser} post={post} posts={posts} setPosts={setPosts}></NewComment>}
+                  {authUser.id!=-1 && 
+                  <NewComment 
+                    authUser={authUser} 
+                    post={post} 
+                    posts={posts} 
+                    setPosts={setPosts}></NewComment>}
                 </div>
               </div>
             )

@@ -2,15 +2,17 @@ import React, { useState } from "react";
 
 let postId = 3;
 
-const NewPost = ({loginedUser,posts,setPosts}) => {
+const NewPost = ({authUser,posts,setPosts}) => {
   const [title, setTitle] = useState('')
   const [text, setText] = useState('')
   // const [postId, setPostId] = useState(3)
   
   let newPosts = [];
+  let img;
 
   const [files,setFiles] = useState([])
   const [drag, setDrag] = useState(false)
+  const [drop, setDrop] = useState(false)
   let reader = new FileReader();
   let uploadImg;
     if(files[0]){
@@ -33,6 +35,7 @@ const NewPost = ({loginedUser,posts,setPosts}) => {
     var loadedFiles = [...e.dataTransfer.files]
     setFiles([...loadedFiles])
     setDrag(false)
+    setDrop(true)
     console.log(files)
   }
 
@@ -41,12 +44,18 @@ const NewPost = ({loginedUser,posts,setPosts}) => {
       let randomId = randomIdF()
     if(title) {
       
-      const newPost = {id:randomId, date: new Date(), author: loginedUser,title,text,likes:0,comments:[]}
-      if(!uploadImg){
-        uploadImg = "https://mizez.com/custom/mizez/img/general/no-image-available.png"
+      const newPost = {id:randomId, date: new Date(), author: authUser,title,text,likes:0,comments:[]}
+      if(img) {
+        newPost.image = img;
+      }
+      else if(uploadImg) {
+        newPost.image = uploadImg;
+      }
+      else if(img && uploadImg) {
+        newPost.image = uploadImg;
       }
       else {
-        newPost.image = uploadImg;
+        newPost.image = null;
       }
       postId++;
       newPosts = posts.slice();
@@ -54,11 +63,23 @@ const NewPost = ({loginedUser,posts,setPosts}) => {
       setPosts(newPosts)
       setTitle("")
       setText("")
+      setDrop(false)
     }
     else {
       alert("Заполните поле заголовка")
     }
     setFiles([])
+  }
+
+  function downloadImage(e) {
+    let file = e.target.files[0];
+      if(file!=undefined){
+      const reader= new FileReader();
+      reader.onload=function(){
+      img = this.result;
+      };
+      reader.readAsDataURL(file);
+      }
   }
 
   
@@ -87,12 +108,14 @@ const NewPost = ({loginedUser,posts,setPosts}) => {
                   onDragOver={e => dragStartHandler(e)}
                   onDrop={e => onDropHandler(e)}
                   >Отппустите изображение, чтобы загрузить</div>
-                :<div
+                :<div className="loaded_container"
                   onDragStart={e => dragStartHandler(e)}
                   onDragLeave={e => dragLeaveHandler(e)}
                   onDragOver={e => dragStartHandler(e)}
-                >Перетащите изображение, чтобы загрузить</div>}
+                >{drop? files.map(file => <span className="loaded">{file.name}</span>): "Перетащите изображение, чтобы загрузить"}</div>}
         </div>
+        <input type="file" onChange={e => downloadImage(e)}></input>
+        <img alt="" id="testDataURL"></img>
       <button 
         onClick={addNewPost}
         className="add_new_post_btn">Add</button>
